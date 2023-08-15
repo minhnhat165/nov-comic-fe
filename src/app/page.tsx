@@ -11,9 +11,9 @@ import { redirect } from 'next/navigation';
 
 const getRecommendComic = async (): Promise<Comic[]> => {
 	const res = await fetch(`${COMIC_API_URL}/recommend-comics`, {
-		next: {
-			revalidate: 600,
-		},
+		// next: {
+		// 	revalidate: 600,
+		// },
 	});
 	const data = await res.json();
 	return data;
@@ -27,11 +27,11 @@ const getRecentUpdate = async ({
 	try {
 		const res = await fetch(
 			`${COMIC_API_URL}/recent-update-comics?page=${page}`,
-			{
-				next: {
-					revalidate: 600,
-				},
-			},
+			// {
+			// 	next: {
+			// 		revalidate: 600,
+			// 	},
+			// },
 		);
 		const data = await res.json();
 

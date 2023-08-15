@@ -55,18 +55,16 @@ export const ComicDetails = ({ data }: ComicDetailsProps) => {
 				{chapters.length > 0 && (
 					<>
 						<Link
-							href={`/comics/${data.id}/${chapters[0].id}`}
+							href={`/comics/${data.id}/${
+								chapters[chapters.length - 1].id
+							}`}
 						>
 							<Button variant="default" size="sm">
 								<EyeIcon className="w-4 h-4 mr-2" /> Read first
 							</Button>
 						</Link>
 
-						<Link
-							href={`/comics/${data.id}/${
-								chapters[chapters.length - 1].id
-							}`}
-						>
+						<Link href={`/comics/${data.id}/${chapters[0].id}`}>
 							<Button variant="default" size="sm">
 								<EyeIcon className="w-4 h-4 mr-2" /> Read latest
 							</Button>

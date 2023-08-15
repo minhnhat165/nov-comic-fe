@@ -9,9 +9,9 @@ import { redirect } from 'next/navigation';
 const getComicDetail = async ({ id }: { id: string }): Promise<Comic> => {
 	try {
 		const res = await fetch(`${COMIC_API_URL}/comics/${id}`, {
-			next: {
-				revalidate: 600,
-			},
+			// next: {
+			// 	revalidate: 600,
+			// },
 		});
 		const data = await res.json();
 
