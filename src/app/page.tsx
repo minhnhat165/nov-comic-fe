@@ -11,9 +11,9 @@ import { redirect } from 'next/navigation';
 
 const getRecommendComic = async (): Promise<Comic[]> => {
 	const res = await fetch(`${COMIC_API_URL}/recommend-comics`, {
-		// next: {
-		// 	revalidate: 600,
-		// },
+		next: {
+			revalidate: 600,
+		},
 	});
 	const data = await res.json();
 	return data;
@@ -27,11 +27,11 @@ const getRecentUpdate = async ({
 	try {
 		const res = await fetch(
 			`${COMIC_API_URL}/recent-update-comics?page=${page}`,
-			// {
-			// 	next: {
-			// 		revalidate: 600,
-			// 	},
-			// },
+			{
+				next: {
+					revalidate: 600,
+				},
+			},
 		);
 		const data = await res.json();
 
@@ -76,7 +76,7 @@ export default async function Home(props: HomeProps) {
 				>
 					Recent Update
 				</Typography>
-				<div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+				<div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 					{comics.map((comic) => (
 						<div key={comic.id}>
 							<ComicCard data={comic} />

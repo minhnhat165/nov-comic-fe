@@ -9,7 +9,7 @@ export interface DefaultComicCardProps {
 
 export const DefaultComicCard = ({ data }: DefaultComicCardProps) => {
 	return (
-		<div className="p-0 h-52 rounded overflow-hidden relative shadow">
+		<div className="p-0 h-52 rounded overflow-hidden relative shadow shadow-primary">
 			<Link href={`comics/${data.id}`}>
 				<Image
 					src={data.thumbnail}

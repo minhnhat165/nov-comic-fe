@@ -81,9 +81,9 @@ export const ChapterBar = (props: ChapterBarProps) => {
 				</Link>
 				<Dialog>
 					<DialogTrigger asChild>
-						<div className="p-2 bg-white rounded-sm flex gap-2">
+						<div className="p-2 bg-white rounded-sm flex gap-2 max-w-[120px]">
 							<div>
-								<span className="text-sm text-primary/80">
+								<span className="text-sm text-primary/80 line-clamp-1">
 									{currentChapter?.name}
 								</span>
 							</div>

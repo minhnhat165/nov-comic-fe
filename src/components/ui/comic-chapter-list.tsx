@@ -24,10 +24,10 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 	const topRef = useRef<HTMLDivElement>(null);
 	const bottomRef = useRef<HTMLDivElement>(null);
 	const scrollToTop = () => {
-		topRef.current?.scrollIntoView({ behavior: 'smooth' });
+		topRef.current?.scrollIntoView({ behavior: 'instant' });
 	};
 	const scrollToBottom = () => {
-		bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+		bottomRef.current?.scrollIntoView({ behavior: 'instant' });
 	};
 	// Create a ref for the active chapter
 	const activeChapterRef = useRef<HTMLDivElement>(null);
@@ -67,6 +67,7 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 						<div
 							key={chapter.id}
 							ref={isActive ? activeChapterRef : undefined}
+							className="border-b last:border-0"
 						>
 							<Link
 								href={`/comics/${props.comicId}/${chapter.id}`}
@@ -95,7 +96,7 @@ const ChapterItem = ({
 	isActive?: boolean;
 }) => {
 	return (
-		<div className="w-full p-4 border-b last:border-0 group">
+		<div className="w-full p-4 group">
 			<Typography
 				variant="caption"
 				weight="bold"

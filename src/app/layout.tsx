@@ -1,7 +1,9 @@
 import './globals.css';
 
+import Loading from './loading';
 import type { Metadata } from 'next';
 import { Providers } from '@/providers';
+import { Suspense } from 'react';
 import { TopNav } from '@/components/layout';
 import { poppinsVN } from '@/app/styles/fonts';
 

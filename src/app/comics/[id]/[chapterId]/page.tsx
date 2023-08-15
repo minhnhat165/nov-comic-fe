@@ -25,11 +25,11 @@ const getComicChapter = async ({
 	try {
 		const res = await fetch(
 			`${COMIC_API_URL}/comics/${comicId}/chapters/${chapterId}`,
-			// {
-			// 	next: {
-			// 		revalidate: 600,
-			// 	},
-			// },
+			{
+				next: {
+					revalidate: 600,
+				},
+			},
 		);
 		const data = await res.json();
 

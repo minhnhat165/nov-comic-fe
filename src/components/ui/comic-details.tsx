@@ -27,24 +27,24 @@ export const ComicDetails = ({ data }: ComicDetailsProps) => {
 					width={180}
 					height={200}
 				/>
-				<div className="absolute bg-black/50 w-full bottom-0 p-1">
+				<div className="absolute flex gap-4 bg-black/50 w-full bottom-0 p-1">
 					<Typography
 						variant="caption"
 						className="text-white flex items-center text-xs"
 					>
 						<EyeIcon className="w-3 h-3 mr-2" />
-						{Intl.NumberFormat('en-US').format(
-							data?.total_views || 0,
-						)}{' '}
+						{Intl.NumberFormat('en-US', {
+							notation: 'compact',
+						}).format(data?.total_views || 0)}{' '}
 					</Typography>
 					<Typography
 						variant="caption"
 						className="text-white flex items-center text-xs"
 					>
 						<UsersIcon className="w-3 h-3 mr-2" />
-						{Intl.NumberFormat('en-US').format(
-							data?.followers || 0,
-						)}{' '}
+						{Intl.NumberFormat('en-US', {
+							notation: 'compact',
+						}).format(data?.followers || 0)}{' '}
 					</Typography>
 				</div>
 			</div>
@@ -72,7 +72,7 @@ export const ComicDetails = ({ data }: ComicDetailsProps) => {
 					</>
 				)}
 			</div>
-			<div className="flex flex-col gap-3">
+			<div className="flex flex-col gap-3 w-full">
 				<Section title="Genres">
 					<div className="flex flex-wrap gap-2">
 						{genres.map((genre) => (
@@ -130,7 +130,7 @@ const Section = ({
 }) => {
 	return (
 		<div>
-			<Typography variant="h4" weight="semibold">
+			<Typography variant="h5" weight="semibold">
 				{title}
 			</Typography>
 			{children}
