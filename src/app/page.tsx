@@ -29,7 +29,7 @@ const getRecentUpdate = async ({
 			`${COMIC_API_URL}/recent-update-comics?page=${page}`,
 			{
 				next: {
-					revalidate: 600,
+					revalidate: 180,
 				},
 			},
 		);

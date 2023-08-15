@@ -17,11 +17,14 @@ import { ModeToggle } from '../mode-toggle';
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/utils/tw';
 import { useHideOnScroll } from '@/hooks/use-hide-on-scroll';
+import { useRouter } from 'next/navigation';
 
 export interface TopNavProps {}
 
 export const TopNav = (props: TopNavProps) => {
 	const { visible } = useHideOnScroll();
+
+	const router = useRouter();
 
 	return (
 		<>
@@ -38,7 +41,7 @@ export const TopNav = (props: TopNavProps) => {
 						'flex justify-between items-center h-12 px-4 bg-primary/5 shadow',
 					)}
 				>
-					<Link href="/">
+					<Link onClick={() => router.refresh()} href="/">
 						<Logo />
 					</Link>
 					<div className="flex gap-2">
