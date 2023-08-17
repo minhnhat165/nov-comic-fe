@@ -7,6 +7,7 @@ import { CRAWLER_API_URL } from '@/configs';
 import { ListResponse } from '@/types/api';
 import { convertViToEn } from '@/utils/vn2en';
 
+export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl?.searchParams;
@@ -15,11 +16,7 @@ export async function GET(req: NextRequest) {
 			: 1;
 		if (page < 1) page = 1;
 
-		const res = await fetch(`${CRAWLER_API_URL}/?page=${page}`, {
-			next: {
-				revalidate: 60,
-			},
-		});
+		const res = await fetch(`${CRAWLER_API_URL}/?page=${page}`);
 		const htmlString = await res.text();
 		const $ = cheerio.load(htmlString);
 		const comics: Comic[] = [];
@@ -35,7 +32,7 @@ export async function GET(req: NextRequest) {
 				.first()
 				.attr('data-original') as string;
 
-			if (comic.thumbnail.startsWith('//')) {
+			if (comic?.thumbnail?.startsWith('//')) {
 				comic.thumbnail = 'https:' + comic.thumbnail;
 			}
 

@@ -1,10 +1,11 @@
 import * as cheerio from 'cheerio';
 
-import { Chapter, Comic, PageChapter } from '@/types/comic';
+import { Comic, PageChapter } from '@/types/comic';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { CRAWLER_API_URL } from '@/configs';
 
+export const dynamic = 'force-dynamic';
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { id: string; chapterId: string[] } },

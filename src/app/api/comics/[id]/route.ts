@@ -5,12 +5,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { CRAWLER_API_URL } from '@/configs';
 import { Comic } from '@/types/comic';
 
+export const dynamic = 'force-dynamic';
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const res = await fetch(`${CRAWLER_API_URL}/truyen-tranh/${params.id}`);
+		const res = await fetch(
+			`${CRAWLER_API_URL}/truyen-tranh/${params.id}`,
+			{
+				cache: 'no-cache',
+			},
+		);
 		const htmlString = await res.text();
 		const $ = cheerio.load(htmlString);
 		const comic = {} as Comic;
