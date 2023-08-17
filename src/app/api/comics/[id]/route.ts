@@ -80,7 +80,10 @@ export async function GET(
 			data: comic,
 		});
 	} catch (error) {
-		console.log(error);
-		return NextResponse.error();
+		return NextResponse.json({
+			error: {
+				message: 'Không tìm thấy truyện',
+			},
+		});
 	}
 }
