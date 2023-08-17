@@ -1,9 +1,7 @@
-import * as cheerio from 'cheerio';
-
 import { Comic, PageChapter } from '@/types/comic';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CRAWLER_API_URL } from '@/configs';
+import { getScrape } from '@/utils/get-scrape';
 
 export const dynamic = 'force-dynamic';
 export async function GET(
@@ -13,13 +11,14 @@ export async function GET(
 	}: { params: { id: string; chapterId: string; chapterSlug: string } },
 ) {
 	try {
-		const path = params.chapterSlug + '/' + params.chapterId;
-
-		const res = await fetch(
-			`${CRAWLER_API_URL}/truyen-tranh/${params.id}/${path}`,
-		);
-		const htmlString = await res.text();
-		const $ = cheerio.load(htmlString);
+		const url =
+			'/truyen-tranh/' +
+			params.id +
+			'/' +
+			params.chapterSlug +
+			'/' +
+			params.chapterId;
+		const $ = await getScrape(url);
 		const pagesChapter: PageChapter[] = $('.page-chapter img')
 			.map(function () {
 				const $this = $(this);

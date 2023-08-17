@@ -1,17 +1,13 @@
-import * as cheerio from 'cheerio';
-
 import { Chapter, Comic } from '@/types/comic';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CRAWLER_API_URL } from '@/configs';
 import { ListResponse } from '@/types/api';
 import { convertViToEn } from '@/utils/vn2en';
+import { getScrape } from '@/utils/get-scrape';
 
 export async function GET(req: NextRequest) {
 	try {
-		const res = await fetch(`${CRAWLER_API_URL}`);
-		const htmlString = await res.text();
-		const $ = cheerio.load(htmlString);
+		const $ = await getScrape('');
 		const comics: Comic[] = [];
 		$('.items-slide .item').map(function () {
 			const comic = {} as Comic;

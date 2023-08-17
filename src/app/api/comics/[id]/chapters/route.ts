@@ -1,19 +1,16 @@
-import * as cheerio from 'cheerio';
-
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CRAWLER_API_URL } from '@/configs';
 import { Chapter } from '@/types/comic';
 import { convertViToEn } from '@/utils/vn2en';
+import { getScrape } from '@/utils/get-scrape';
 
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const res = await fetch(`${CRAWLER_API_URL}/truyen-tranh/${params.id}`);
-		const htmlString = await res.text();
-		const $ = cheerio.load(htmlString);
+		const url = '/truyen-tranh/' + params.id;
+		const $ = await getScrape(url);
 
 		const $chapters = $('.list-chapter li');
 		const chapters: Chapter[] = $chapters

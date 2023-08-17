@@ -1,11 +1,9 @@
-import * as cheerio from 'cheerio';
-
 import { Chapter, Comic } from '@/types/comic';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { CRAWLER_API_URL } from '@/configs';
 import { ListResponse } from '@/types/api';
 import { convertViToEn } from '@/utils/vn2en';
+import { getScrape } from '@/utils/get-scrape';
 
 export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
@@ -16,9 +14,7 @@ export async function GET(req: NextRequest) {
 			: 1;
 		if (page < 1) page = 1;
 
-		const res = await fetch(`${CRAWLER_API_URL}/?page=${page}`);
-		const htmlString = await res.text();
-		const $ = cheerio.load(htmlString);
+		const $ = await getScrape(`/?page=${page}`);
 		const comics: Comic[] = [];
 		$('.items .item').map(function () {
 			const comic = {} as Comic;
