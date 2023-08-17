@@ -75,10 +75,14 @@ export async function GET(
 		});
 	} catch (error) {
 		let e = error as Error;
+		const res = await fetch(`${CRAWLER_API_URL}/truyen-tranh/${params.id}`);
+		const htmlString = await res.text();
+		const $ = cheerio.load(htmlString);
 		return NextResponse.json({
 			error: {
 				message: e.message,
 			},
+			data: $.html(),
 		});
 	}
 }
