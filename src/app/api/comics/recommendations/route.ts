@@ -9,11 +9,7 @@ import { convertViToEn } from '@/utils/vn2en';
 
 export async function GET(req: NextRequest) {
 	try {
-		const res = await fetch(`${CRAWLER_API_URL}`, {
-			next: {
-				revalidate: 60,
-			},
-		});
+		const res = await fetch(`${CRAWLER_API_URL}`);
 		const htmlString = await res.text();
 		const $ = cheerio.load(htmlString);
 		const comics: Comic[] = [];

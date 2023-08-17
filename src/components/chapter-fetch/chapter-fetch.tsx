@@ -1,7 +1,7 @@
 'use client';
 
 import { Chapter } from '@/types/comic';
-import { ComicChapterList } from '@/components/ui/comic-chapter-list';
+import { ComicChapterList } from '../ui/comic-chapter-list';
 import { useFetchChapters } from '@/hooks/use-fetch-chapters';
 import { useMemo } from 'react';
 

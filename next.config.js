@@ -1,27 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'nettruyennew.com',
-			},
-			{
-				protocol: 'https',
-				hostname: 'comics-api.vercel.app',
-			},
-			{
-				protocol: 'https',
-				hostname: 'st.nettruyenmax.com',
-			},
-			{
-				protocol: 'https',
-				hostname: 'st.ntcdntempv3.com',
-			},
-			{
-				protocol: 'https',
-				hostname: 'st.nettruyenio.com',
-			},
+		domains: [
+			'nettruyennew.com',
+			'comics-api.vercel.app',
+			'st.nettruyenmax.com',
+			'st.ntcdntempv3.com',
+			'st.nettruyenio.com',
+			'p.ntcdntempv26.com',
 		],
 	},
 };

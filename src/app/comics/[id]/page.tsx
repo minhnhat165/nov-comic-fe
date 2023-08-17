@@ -1,5 +1,6 @@
 import 'keen-slider/keen-slider.min.css';
 
+import { ChapterFetch } from '@/components/chapter-fetch/chapter-fetch';
 import { Comic } from '@/types/comic';
 import { ComicDetails } from '@/components/ui/comic-details';
 import { DOMAIN } from '@/configs';
@@ -52,6 +53,9 @@ export default async function ComicDetail(props: ComicDetailProps) {
 	return (
 		<main className="flex flex-col gap-6 px-2 py-4">
 			<ComicDetails data={comic} />
+			<div>
+				<ChapterFetch id={comic.id} />
+			</div>
 		</main>
 	);
 }
