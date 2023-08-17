@@ -5,18 +5,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { CRAWLER_API_URL } from '@/configs';
 import { Comic } from '@/types/comic';
 
-export const dynamic = 'force-dynamic';
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const res = await fetch(
-			`${CRAWLER_API_URL}/truyen-tranh/${params.id}`,
-			{
-				cache: 'no-cache',
-			},
-		);
+		const res = await fetch(`${CRAWLER_API_URL}/truyen-tranh/${params.id}`);
 		const htmlString = await res.text();
 		const $ = cheerio.load(htmlString);
 		const comic = {} as Comic;
@@ -26,7 +20,7 @@ export async function GET(
 		comic.thumbnail = $detailInfo
 			.find('.col-image img')
 			.attr('src') as string;
-		if (comic.thumbnail.startsWith('//')) {
+		if (comic?.thumbnail?.startsWith('//')) {
 			comic.thumbnail = 'https:' + comic.thumbnail;
 		}
 		comic.author = $detailInfo
