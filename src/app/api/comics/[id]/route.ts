@@ -80,9 +80,10 @@ export async function GET(
 			data: comic,
 		});
 	} catch (error) {
+		let e = error as Error;
 		return NextResponse.json({
 			error: {
-				message: 'Không tìm thấy truyện',
+				message: e.message,
 			},
 		});
 	}
