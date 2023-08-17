@@ -20,6 +20,7 @@ export async function GET(
 		const htmlString = await res.text();
 		const $ = cheerio.load(htmlString);
 		const comic = {} as Comic;
+		comic.id = params.id;
 		comic.name = $('.title-detail').text().trim();
 		const $detailInfo = $('.detail-info');
 		comic.thumbnail = $detailInfo

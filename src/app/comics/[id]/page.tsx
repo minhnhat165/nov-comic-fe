@@ -13,11 +13,7 @@ const getComicDetail = async ({
 	data: Comic;
 }> => {
 	try {
-		const res = await fetch(`${DOMAIN}/comics/${id}`, {
-			next: {
-				revalidate: 600,
-			},
-		});
+		const res = await fetch(`${DOMAIN}/api/comics/${id}`);
 		const data = await res.json();
 
 		if ('status' in data && data.status === 404) {

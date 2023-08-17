@@ -50,8 +50,8 @@ interface HomeProps {
 }
 
 export default async function Home(props: HomeProps) {
-	const recommend = await getRecommendComic();
-	const { items } = recommend.data;
+	// const recommend = await getRecommendComic();
+	// const { items } = recommend.data;
 	const { searchParams } = props;
 	const page = searchParams.page ? Number(searchParams.page) : 1;
 	const newComics = await getRecentUpdate({ page });
@@ -59,15 +59,15 @@ export default async function Home(props: HomeProps) {
 
 	return (
 		<main className="flex flex-col gap-4">
-			<section className="flex flex-col gap-2">
+			{/* <section className="flex flex-col gap-2">
 				<div className="flex items-center gap-1">
 					<FireIcon className="w-6 h-6 inline-block text-primary" />
 					<Typography variant="h4" weight="semibold">
 						Recommend
 					</Typography>
 				</div>
-				<ComicRecommend data={items} />
-			</section>
+				<ComicRecommend data={items} /> */}
+			{/* </section> */}
 			<section className="flex flex-col gap-2">
 				<div className="flex items-center gap-1">
 					<ClockIcon className="w-6 h-6 inline-block text-primary" />

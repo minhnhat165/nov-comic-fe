@@ -8,10 +8,12 @@ import { CRAWLER_API_URL } from '@/configs';
 export const dynamic = 'force-dynamic';
 export async function GET(
 	req: NextRequest,
-	{ params }: { params: { id: string; chapterId: string[] } },
+	{
+		params,
+	}: { params: { id: string; chapterId: string; chapterSlug: string } },
 ) {
 	try {
-		const path = params.chapterId.join('/');
+		const path = params.chapterSlug + '/' + params.chapterId;
 
 		const res = await fetch(
 			`${CRAWLER_API_URL}/truyen-tranh/${params.id}/${path}`,
@@ -46,9 +48,9 @@ export async function GET(
 						.trim(),
 				} as Comic,
 				chapter: {
-					id: params.chapterId[1],
+					id: params.chapterId,
 					name: $('.breadcrumb li').last().text().trim(),
-					slug: params.chapterId[0],
+					slug: params.chapterSlug,
 				},
 			},
 		});

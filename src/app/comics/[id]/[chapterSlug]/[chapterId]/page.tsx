@@ -52,26 +52,26 @@ interface ComicChapterProps {
 	};
 }
 
-export async function generateMetadata({
-	params,
-}: ComicChapterProps): Promise<Metadata> {
-	const { id, chapterId, chapterSlug } = params;
-	const res = await getComicChapter({ comicId: id, chapterId, chapterSlug });
-	const { chapter, comic } = res.data;
-	return {
-		title: `${comic.name} - ${chapter.name}`,
-		openGraph: {
-			images: [
-				{
-					url: comic.thumbnail,
-					width: 500,
-					height: 500,
-					alt: comic.name,
-				},
-			],
-		},
-	};
-}
+// export async function generateMetadata({
+// 	params,
+// }: ComicChapterProps): Promise<Metadata> {
+// 	const { id, chapterId, chapterSlug } = params;
+// 	const res = await getComicChapter({ comicId: id, chapterId, chapterSlug });
+// 	const { chapter, comic } = res.data;
+// 	return {
+// 		title: `${comic.name} - ${chapter.name}`,
+// 		openGraph: {
+// 			images: [
+// 				{
+// 					url: comic.thumbnail,
+// 					width: 500,
+// 					height: 500,
+// 					alt: comic.name,
+// 				},
+// 			],
+// 		},
+// 	};
+// }
 
 export default async function ComicChapter(props: ComicChapterProps) {
 	const { id, chapterId, chapterSlug } = props.params;
