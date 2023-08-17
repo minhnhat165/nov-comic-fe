@@ -4,14 +4,26 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { CRAWLER_API_URL } from '@/configs';
 import { Comic } from '@/types/comic';
+import axios from 'axios';
 
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const res = await fetch(`${CRAWLER_API_URL}/truyen-tranh/${params.id}`);
-		const htmlString = await res.text();
+		const url = CRAWLER_API_URL + '/truyen-tranh/' + params.id;
+		const apikey = 'ebefc08bae7c843cb4dc7138473d9a71d515a614';
+
+		const res = await axios({
+			url: 'https://api.zenrows.com/v1/',
+			method: 'GET',
+			params: {
+				url: url,
+				apikey: apikey,
+			},
+		});
+
+		const htmlString = await res.data;
 		const $ = cheerio.load(htmlString);
 		const comic = {} as Comic;
 		comic.id = params.id;
@@ -72,7 +84,6 @@ export async function GET(
 
 		return NextResponse.json({
 			data: comic,
-			pageRender: $.html(),
 		});
 	} catch (error) {
 		let e = error as Error;
