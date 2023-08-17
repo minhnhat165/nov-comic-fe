@@ -11,7 +11,7 @@ export interface ComicCardProps {
 export const ComicCard = ({ data, variant = 'default' }: ComicCardProps) => {
 	switch (variant) {
 		case 'recommend':
-			return <RecommendComicCard />;
+			return <RecommendComicCard data={data} />;
 		case 'top':
 			return <TopComicCard />;
 		default:

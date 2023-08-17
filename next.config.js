@@ -10,6 +10,18 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: 'comics-api.vercel.app',
 			},
+			{
+				protocol: 'https',
+				hostname: 'st.nettruyenmax.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'st.ntcdntempv3.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'st.nettruyenio.com',
+			},
 		],
 	},
 };

@@ -13,37 +13,49 @@ import { Chapter } from '@/types/comic';
 import { ComicChapterList } from '../ui/comic-chapter-list';
 import Link from 'next/link';
 import { cn } from '@/utils/tw';
+import { genChapterLink } from '@/utils/gen-chapter-link';
+import { useFetchChapters } from '@/hooks/use-fetch-chapters';
 import { useHideOnScroll } from '@/hooks/use-hide-on-scroll';
 import { useMemo } from 'react';
 
 export interface ChapterBarProps {
 	comicId: string;
-	currentChapterId: number;
-	chapters: Chapter[];
+	currentChapterId?: string | undefined;
 }
 
 export const ChapterBar = (props: ChapterBarProps) => {
 	const { visible } = useHideOnScroll();
-	const { currentChapterId, chapters } = props;
+	const { currentChapterId } = props;
+
+	const { data } = useFetchChapters(props.comicId);
+	const chapters = useMemo(() => {
+		return (data?.data as Chapter[]) || ([] as Chapter[]);
+	}, [data]);
 
 	const currentChapter = useMemo(() => {
 		return chapters.find((chapter) => {
-			return chapter.id.toString() === currentChapterId.toString();
+			return chapter.id.toString() === currentChapterId;
 		});
 	}, [chapters, currentChapterId]);
 
 	const prevChapter = useMemo(() => {
 		const index = chapters.findIndex((chapter) => {
-			return chapter.id.toString() === currentChapterId.toString();
+			return chapter.id.toString() === currentChapterId;
 		});
-
+		if (index === -1) {
+			return undefined;
+		}
 		return chapters[index + 1];
 	}, [chapters, currentChapterId]);
 
 	const nextChapter = useMemo(() => {
 		const index = chapters.findIndex((chapter) => {
-			return chapter.id.toString() === currentChapterId.toString();
+			return chapter.id.toString() === currentChapterId;
 		});
+
+		if (index === -1) {
+			return undefined;
+		}
 
 		return chapters[index - 1];
 	}, [chapters, currentChapterId]);
@@ -59,53 +71,67 @@ export const ChapterBar = (props: ChapterBarProps) => {
 		>
 			<div
 				className={cn(
-					'flex justify-between items-center h-12 px-4 bg-primary/5 shadow',
+					'flex gap-2 items-center h-12 px-4 bg-primary/5 shadow',
 				)}
 			>
-				{' '}
 				<Link href={`/comics/${props.comicId}`}>
 					<Button variant="outline" size="icon">
 						<InformationCircleIcon className="w-6 h-6" />
 					</Button>
 				</Link>
-				<Link href={`/comics/${props.comicId}/${prevChapter?.id}`}>
-					<Button
-						disabled={
-							currentChapter?.id.toString() ===
-							chapters[chapters.length - 1].id.toString()
-						}
-						size="icon"
+				<div className="flex flex-1 justify-center gap-2">
+					<Link
+						href={genChapterLink({
+							comicId: props.comicId,
+							chapterId: prevChapter?.id || '',
+							chapterSlug: prevChapter?.slug || '',
+						})}
 					>
-						<ArrowLeftCircleIcon className="w-6 h-6" />
-					</Button>
-				</Link>
-				<Dialog>
-					<DialogTrigger asChild>
-						<div className="p-2 bg-white rounded-sm flex gap-2 max-w-[120px]">
-							<div>
+						<Button
+							disabled={
+								currentChapter?.id.toString() ===
+								chapters[chapters.length - 1]?.id?.toString()
+							}
+							size="icon"
+						>
+							<ArrowLeftCircleIcon className="w-6 h-6" />
+						</Button>
+					</Link>
+					<Dialog>
+						<DialogTrigger asChild>
+							<div className="p-2 bg-white rounded-sm flex items-center gap-2  w-[140px]">
 								<span className="text-sm text-primary/80 line-clamp-1">
 									{currentChapter?.name}
 								</span>
+								<ChevronDownIcon className="text-primary w-6 h-6" />
 							</div>
-							<ChevronDownIcon className="text-primary w-6 h-6" />
-						</div>
-					</DialogTrigger>
-					<DialogContent className="sm:max-w-[425px] p-0">
-						<ComicChapterList
-							currentChapterId={currentChapterId}
-							comicId={props.comicId}
-							data={chapters}
-						/>
-					</DialogContent>
-				</Dialog>
-				<Link href={`/comics/${props.comicId}/${nextChapter?.id}`}>
-					<Button
-						disabled={currentChapter?.id === chapters[0].id}
-						size="icon"
+						</DialogTrigger>
+						<DialogContent className="sm:max-w-[425px] p-0">
+							<ComicChapterList
+								currentChapterId={currentChapterId}
+								comicId={props.comicId}
+								chapters={chapters}
+							/>
+						</DialogContent>
+					</Dialog>
+					<Link
+						href={genChapterLink({
+							comicId: props.comicId,
+							chapterId: nextChapter?.id || '',
+							chapterSlug: nextChapter?.slug || '',
+						})}
 					>
-						<ArrowRightCircleIcon className="w-6 h-6" />
-					</Button>
-				</Link>
+						<Button
+							disabled={
+								currentChapter?.id.toString() ===
+								chapters[0]?.id?.toString()
+							}
+							size="icon"
+						>
+							<ArrowRightCircleIcon className="w-6 h-6" />
+						</Button>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

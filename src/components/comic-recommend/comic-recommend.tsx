@@ -1,5 +1,7 @@
 'use client';
 
+import 'keen-slider/keen-slider.min.css';
+
 import { Comic } from '@/types/comic';
 import { ComicCard } from '../ui/comic-card';
 import { useKeenSlider } from 'keen-slider/react';
@@ -52,7 +54,7 @@ export const ComicRecommend = (props: ComicRecommendProps) => {
 		<div ref={sliderRef} className="keen-slider">
 			{props.data.map((comic) => (
 				<div key={comic.id} className="keen-slider__slide">
-					<ComicCard data={comic} />
+					<ComicCard variant="recommend" data={comic} />
 				</div>
 			))}
 		</div>

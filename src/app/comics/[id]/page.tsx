@@ -1,14 +1,19 @@
 import 'keen-slider/keen-slider.min.css';
 
-import { COMIC_API_URL } from '@/configs';
 import { Comic } from '@/types/comic';
-import { ComicChapterList } from '@/components/ui/comic-chapter-list';
 import { ComicDetails } from '@/components/ui/comic-details';
+import { DOMAIN } from '@/configs';
 import { redirect } from 'next/navigation';
 
-const getComicDetail = async ({ id }: { id: string }): Promise<Comic> => {
+const getComicDetail = async ({
+	id,
+}: {
+	id: string;
+}): Promise<{
+	data: Comic;
+}> => {
 	try {
-		const res = await fetch(`${COMIC_API_URL}/comics/${id}`, {
+		const res = await fetch(`${DOMAIN}/comics/${id}`, {
 			next: {
 				revalidate: 600,
 			},
@@ -32,10 +37,12 @@ interface ComicDetailProps {
 
 export async function generateMetadata({ params }: ComicDetailProps) {
 	const { id } = params;
-	const comic = await getComicDetail({ id });
+	const data = await getComicDetail({ id });
+
+	const comic = data.data;
 
 	return {
-		title: comic.title,
+		title: comic.name,
 		description: comic.description,
 		image: comic.thumbnail,
 	};
@@ -43,17 +50,12 @@ export async function generateMetadata({ params }: ComicDetailProps) {
 
 export default async function ComicDetail(props: ComicDetailProps) {
 	const { id } = props.params;
-	const comic = await getComicDetail({ id });
+	const data = await getComicDetail({ id });
+	const comic = data.data;
 
 	return (
 		<main className="flex flex-col gap-6 px-2 py-4">
 			<ComicDetails data={comic} />
-			<div>
-				<ComicChapterList
-					comicId={comic.id}
-					data={comic?.chapters || []}
-				/>
-			</div>
 		</main>
 	);
 }

@@ -1,15 +1,18 @@
 import './globals.css';
 
-import Loading from './loading';
 import type { Metadata } from 'next';
 import { Providers } from '@/providers';
-import { Suspense } from 'react';
 import { TopNav } from '@/components/layout';
 import { poppinsVN } from '@/app/styles/fonts';
 
 export const metadata: Metadata = {
 	title: 'Nov Comics',
 	description: 'Read comics online for free.',
+	openGraph: {
+		images: [
+			'https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/05/Featured-Image-Shonen-Jump-wrong-better-Cropped.jpg',
+		],
+	},
 };
 
 export default function RootLayout({

@@ -1,3 +1,4 @@
+import { ReactQueryProvider } from '@/providers/react-query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
 export interface ProvidersProps {
@@ -7,7 +8,7 @@ export interface ProvidersProps {
 export const Providers = (props: ProvidersProps) => {
 	return (
 		<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-			{props.children}
+			<ReactQueryProvider> {props.children}</ReactQueryProvider>
 		</ThemeProvider>
 	);
 };

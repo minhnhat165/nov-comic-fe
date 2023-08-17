@@ -1,6 +1,6 @@
 type PageInfo = {
-	total_pages: number;
-	current_page: number;
+	totalPages: number;
+	currentPage: number;
 };
 
 export type ErrorResponse = {
@@ -8,6 +8,8 @@ export type ErrorResponse = {
 	message: string;
 };
 
-export type ListResponse<T, Key extends string = 'data'> = {
-	[K in Key]: T[];
-} & PageInfo;
+export type ListResponse<T> = {
+	data: {
+		items: T[];
+	} & PageInfo;
+};

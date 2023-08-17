@@ -3,7 +3,9 @@
 import {
 	ArrowDownCircleIcon,
 	ArrowUpCircleIcon,
+	ClockIcon,
 	DocumentTextIcon,
+	EyeIcon,
 } from '@heroicons/react/24/solid';
 import { useEffect, useRef } from 'react';
 
@@ -13,13 +15,13 @@ import { Chapter } from '@/types/comic';
 import Link from 'next/link';
 import { Typography } from './typography';
 import { cn } from '@/utils/tw';
+import { genChapterLink } from '@/utils/gen-chapter-link';
 
 export interface ComicChapterListProps {
-	data: Chapter[];
 	comicId: string;
-	currentChapterId?: number;
+	chapters: Chapter[];
+	currentChapterId?: string | undefined;
 }
-
 export const ComicChapterList = (props: ComicChapterListProps) => {
 	const topRef = useRef<HTMLDivElement>(null);
 	const bottomRef = useRef<HTMLDivElement>(null);
@@ -59,7 +61,7 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 			</div>
 			<div className="max-h-[70vh] overflow-y-scroll">
 				<div ref={topRef} className="h-full w-1" />
-				{props.data.map((chapter) => {
+				{props.chapters.map((chapter) => {
 					const isActive =
 						chapter.id.toString() ===
 						props.currentChapterId?.toString();
@@ -67,10 +69,17 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 						<div
 							key={chapter.id}
 							ref={isActive ? activeChapterRef : undefined}
-							className="border-b last:border-0"
+							className={cn(
+								'border-b ',
+								isActive ? 'bg-primary text-white' : '',
+							)}
 						>
 							<Link
-								href={`/comics/${props.comicId}/${chapter.id}`}
+								href={genChapterLink({
+									comicId: props.comicId,
+									chapterId: chapter.id.toString(),
+									chapterSlug: chapter.slug,
+								})}
 								key={chapter.id}
 							>
 								<ChapterItem
@@ -96,23 +105,36 @@ const ChapterItem = ({
 	isActive?: boolean;
 }) => {
 	return (
-		<div className="w-full p-4 group">
-			<Typography
-				variant="caption"
-				weight="bold"
-				className={cn(
-					'group-hover:!text-primary',
-					isActive ? '!text-primary' : '',
-				)}
-			>
-				<DocumentTextIcon
-					className={cn(
-						'w-3 h-3 inline-block',
-						isActive ? '!text-primary' : '',
-					)}
-				/>{' '}
-				{data.name}
-			</Typography>
+		<div className="w-full p-2 flex ">
+			<div className={`flex items-center gap-1`}>
+				<div className="w-3 h-3">{<DocumentTextIcon />}</div>
+				<Typography variant="body2" weight="semibold">
+					{data.name}
+				</Typography>
+			</div>
+
+			<div className="ml-auto flex items-end flex-col">
+				<IconText icon={<EyeIcon />} text={data.viewCount} />
+				<IconText icon={<ClockIcon />} text={data.updatedAt} />
+			</div>
+		</div>
+	);
+};
+
+const IconText = ({
+	icon,
+	text,
+	className = '',
+}: {
+	icon: React.ReactNode;
+	text: string | undefined;
+	className?: string;
+}) => {
+	if (!text) return null;
+	return (
+		<div className={`flex items-center  gap-1 ${className}`}>
+			<Typography variant="body2">{text}</Typography>
+			<div className="w-3 h-3">{icon}</div>
 		</div>
 	);
 };

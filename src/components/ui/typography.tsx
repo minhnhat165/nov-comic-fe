@@ -92,6 +92,7 @@ export interface TypographyProps extends TypographyVariants {
 	children?: React.ReactNode;
 	style?: React.CSSProperties;
 	className?: string;
+	title?: string;
 }
 
 export const Typography = ({ className, ...props }: TypographyProps) => {

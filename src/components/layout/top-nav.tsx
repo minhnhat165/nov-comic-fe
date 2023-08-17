@@ -30,7 +30,7 @@ export const TopNav = (props: TopNavProps) => {
 		<>
 			<div
 				className={cn(
-					'fixed bg-secondary top-0 left-0 right-0 z-10',
+					'fixed bg-card top-0 left-0 right-0 z-10',
 					visible
 						? 'transform translate-y-0 transition-transform duration-200'
 						: 'transform -translate-y-full transition-transform duration-200',
@@ -38,7 +38,7 @@ export const TopNav = (props: TopNavProps) => {
 			>
 				<div
 					className={cn(
-						'flex justify-between items-center h-12 px-4 bg-primary/5 shadow',
+						'flex justify-between items-center h-14 px-4 border-b ',
 					)}
 				>
 					<Link onClick={() => router.refresh()} href="/">
@@ -49,7 +49,7 @@ export const TopNav = (props: TopNavProps) => {
 
 						<Sheet>
 							<SheetTrigger asChild>
-								<Button size="icon" variant="default">
+								<Button size="icon" variant="outline">
 									<Bars3BottomRightIcon className="w-6 h-6" />
 								</Button>
 							</SheetTrigger>
@@ -79,13 +79,14 @@ const Logo = () => {
 			<Typography
 				style={{
 					backgroundImage:
-						'url(https://wallpapercave.com/dwp1x/wp5104277.jpg)',
+						'url(https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/05/Featured-Image-Shonen-Jump-wrong-better-Cropped.jpg)',
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
 					backgroundClip: 'text',
 					WebkitBackgroundClip: 'text',
 					WebkitTextFillColor: 'transparent',
 				}}
+				className="drop-shadow-lg"
 				variant="h2"
 				weight="bold"
 			>
