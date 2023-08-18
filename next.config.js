@@ -8,6 +8,7 @@ const nextConfig = {
 			'st.ntcdntempv3.com',
 			'st.nettruyenio.com',
 			'p.ntcdntempv26.com',
+			'st.nettruyenmaxx.com',
 		],
 	},
 };

@@ -2,8 +2,8 @@ import 'keen-slider/keen-slider.min.css';
 
 import { Chapter, Comic, PageChapter } from '@/types/comic';
 
-import { ChapterBar } from '@/components/chapter-bar';
-import { DOMAIN } from '@/configs';
+import { COMIC_API_URL } from '@/configs';
+import { ChapterNav } from '@/components/comic/chapter-nav';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
@@ -23,7 +23,7 @@ const getComicChapter = async ({
 	};
 }> => {
 	try {
-		const url = `${DOMAIN}/api/comics/${comicId}/${chapterSlug}/${chapterId}`;
+		const url = `${COMIC_API_URL}/${comicId}/${chapterSlug}/${chapterId}`;
 		const res = await fetch(url);
 		const data = await res.json();
 
@@ -98,7 +98,7 @@ export default async function ComicChapter(props: ComicChapterProps) {
 					</div>
 				))}
 			</div>
-			<ChapterBar comicId={id} currentChapterId={chapterId} />
+			<ChapterNav comicId={id} currentChapterId={chapterId} />
 		</main>
 	);
 }

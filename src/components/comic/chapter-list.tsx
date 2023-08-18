@@ -9,20 +9,20 @@ import {
 } from '@heroicons/react/24/solid';
 import { useEffect, useRef } from 'react';
 
-import { Button } from './button';
-import { Card } from './card';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Chapter } from '@/types/comic';
 import Link from 'next/link';
-import { Typography } from './typography';
+import { Typography } from '@/components/ui/typography';
 import { cn } from '@/utils/tw';
 import { genChapterLink } from '@/utils/gen-chapter-link';
 
-export interface ComicChapterListProps {
+export interface ChapterListProps {
 	comicId: string;
 	chapters: Chapter[];
 	currentChapterId?: string | undefined;
 }
-export const ComicChapterList = (props: ComicChapterListProps) => {
+export const ChapterList = (props: ChapterListProps) => {
 	const topRef = useRef<HTMLDivElement>(null);
 	const bottomRef = useRef<HTMLDivElement>(null);
 	const scrollToTop = () => {
@@ -31,10 +31,8 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 	const scrollToBottom = () => {
 		bottomRef.current?.scrollIntoView({ behavior: 'instant' });
 	};
-	// Create a ref for the active chapter
 	const activeChapterRef = useRef<HTMLDivElement>(null);
 
-	// Scroll the active chapter into view
 	const scrollActiveChapterIntoView = () => {
 		activeChapterRef.current?.scrollIntoView({
 			behavior: 'instant',
@@ -82,11 +80,7 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 								})}
 								key={chapter.id}
 							>
-								<ChapterItem
-									isActive={isActive}
-									key={chapter.id}
-									data={chapter}
-								/>
+								<ChapterItem key={chapter.id} data={chapter} />
 							</Link>
 						</div>
 					);
@@ -97,13 +91,7 @@ export const ComicChapterList = (props: ComicChapterListProps) => {
 	);
 };
 
-const ChapterItem = ({
-	data,
-	isActive = false,
-}: {
-	data: Chapter;
-	isActive?: boolean;
-}) => {
+const ChapterItem = ({ data }: { data: Chapter }) => {
 	return (
 		<div className="w-full p-2 flex ">
 			<div className={`flex items-center gap-1`}>

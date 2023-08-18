@@ -1,6 +1,6 @@
 import { EyeIcon, UsersIcon } from '@heroicons/react/24/solid';
 
-import { Badge } from '../badge';
+import { Badge } from '../../ui/badge';
 import { Comic } from '@/types/comic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,6 +31,7 @@ export const DefaultComicCard = ({ data }: DefaultComicCardProps) => {
 						<Typography
 							variant="h6"
 							align="center"
+							weight="semibold"
 							className="text-white line-clamp-1"
 						>
 							{data.name}

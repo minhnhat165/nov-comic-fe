@@ -2,12 +2,11 @@
 
 import { useState } from 'react';
 
-export interface ShowMoreTextProps {
-	text: string;
+export interface DescriptionBoxProps {
+	data: string;
 }
 
-export const ShowMoreText = (props: ShowMoreTextProps) => {
-	const { text } = props;
+export const DescriptionBox = ({ data }: DescriptionBoxProps) => {
 	const [showMore, setShowMore] = useState(false);
 
 	const toggleShowMore = () => {
@@ -16,9 +15,9 @@ export const ShowMoreText = (props: ShowMoreTextProps) => {
 
 	const renderText = () => {
 		if (showMore) {
-			return text;
+			return data;
 		}
-		return text.slice(0, 100);
+		return data.slice(0, 100);
 	};
 
 	return (

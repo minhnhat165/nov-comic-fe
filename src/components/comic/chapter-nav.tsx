@@ -8,9 +8,9 @@ import {
 } from '@heroicons/react/24/solid';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { Chapter } from '@/types/comic';
-import { ComicChapterList } from '../ui/comic-chapter-list';
+import { ChapterList } from '@/components/comic/chapter-list';
 import Link from 'next/link';
 import { cn } from '@/utils/tw';
 import { genChapterLink } from '@/utils/gen-chapter-link';
@@ -18,12 +18,12 @@ import { useFetchChapters } from '@/hooks/use-fetch-chapters';
 import { useHideOnScroll } from '@/hooks/use-hide-on-scroll';
 import { useMemo } from 'react';
 
-export interface ChapterBarProps {
+export interface ChapterNavProps {
 	comicId: string;
 	currentChapterId?: string | undefined;
 }
 
-export const ChapterBar = (props: ChapterBarProps) => {
+export const ChapterNav = (props: ChapterNavProps) => {
 	const { visible } = useHideOnScroll();
 	const { currentChapterId } = props;
 
@@ -107,7 +107,7 @@ export const ChapterBar = (props: ChapterBarProps) => {
 							</div>
 						</DialogTrigger>
 						<DialogContent className="sm:max-w-[425px] p-0">
-							<ComicChapterList
+							<ChapterList
 								currentChapterId={currentChapterId}
 								comicId={props.comicId}
 								chapters={chapters}

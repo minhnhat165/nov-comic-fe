@@ -1,18 +1,18 @@
 import 'keen-slider/keen-slider.min.css';
 
+import { COMIC_API_URL, DOMAIN } from '@/configs';
 import { ClockIcon, FireIcon } from '@heroicons/react/24/solid';
 
 import { Comic } from '@/types/comic';
-import { ComicCard } from '@/components/ui/comic-card';
-import { ComicRecommend } from '@/components/comic-recommend';
-import { DOMAIN } from '@/configs';
+import { ComicCard } from '@/components/comic/comic-card';
 import { ListResponse } from '@/types/api';
 import { Pagination } from '@/components/ui/pagination';
+import { RecommendSlide } from '@/components/comic/recommend-slide';
 import { Typography } from '@/components/ui/typography';
 import { redirect } from 'next/navigation';
 
 const getRecommendComic = async (): Promise<ListResponse<Comic>> => {
-	const res = await fetch(`${DOMAIN}/api/comics/recommendations`, {
+	const res = await fetch(`${COMIC_API_URL}/recommendations`, {
 		next: {
 			revalidate: 180,
 		},
@@ -66,7 +66,7 @@ export default async function Home(props: HomeProps) {
 						Recommend
 					</Typography>
 				</div>
-				<ComicRecommend data={items} />
+				<RecommendSlide data={items} />
 			</section>
 			<section className="flex flex-col gap-2">
 				<div className="flex items-center gap-1">

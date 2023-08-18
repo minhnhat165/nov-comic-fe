@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { Chapter } from '@/types/comic';
 import { EyeIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
@@ -8,11 +8,11 @@ import { genChapterLink } from '@/utils/gen-chapter-link';
 import { useFetchChapters } from '@/hooks/use-fetch-chapters';
 import { useMemo } from 'react';
 
-export interface ComicDetailButtonProps {
+export interface ReadActionProps {
 	comicId: string;
 }
 
-export const ComicDetailButton = ({ comicId }: ComicDetailButtonProps) => {
+export const ReadAction = ({ comicId }: ReadActionProps) => {
 	const { data: chaptersData } = useFetchChapters(comicId);
 	const chapters = useMemo(() => {
 		return (chaptersData?.data || []) as Chapter[];

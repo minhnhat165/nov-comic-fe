@@ -1,7 +1,7 @@
 'use client';
 
 import { Chapter } from '@/types/comic';
-import { ComicChapterList } from '../ui/comic-chapter-list';
+import { ChapterList } from './chapter-list';
 import { useFetchChapters } from '@/hooks/use-fetch-chapters';
 import { useMemo } from 'react';
 
@@ -16,5 +16,5 @@ export const ChapterFetch = ({ id }: ChapterFetchProps) => {
 		return (data?.data as Chapter[]) || ([] as Chapter[]);
 	}, [data]);
 
-	return <ComicChapterList chapters={chapters} comicId={id} />;
+	return <ChapterList chapters={chapters} comicId={id} />;
 };

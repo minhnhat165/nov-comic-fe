@@ -3,14 +3,14 @@
 import 'keen-slider/keen-slider.min.css';
 
 import { Comic } from '@/types/comic';
-import { ComicCard } from '../ui/comic-card';
+import { ComicCard } from '@/components/comic/comic-card';
 import { useKeenSlider } from 'keen-slider/react';
 
-export interface ComicRecommendProps {
+export interface RecommendSlideProps {
 	data: Comic[];
 }
 
-export const ComicRecommend = (props: ComicRecommendProps) => {
+export const RecommendSlide = (props: RecommendSlideProps) => {
 	const [sliderRef] = useKeenSlider<HTMLDivElement>(
 		{
 			loop: true,

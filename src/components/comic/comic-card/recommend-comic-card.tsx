@@ -1,7 +1,7 @@
 import { Comic } from '@/types/comic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Typography } from '../typography';
+import { Typography } from '../../ui/typography';
 import { genChapterLink } from '@/utils/gen-chapter-link';
 
 export interface RecommendComicCardProps {
