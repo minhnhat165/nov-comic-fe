@@ -16,7 +16,10 @@ export const DefaultComicCard = ({ data }: DefaultComicCardProps) => {
 	return (
 		<div className="rounded overflow-hidden border">
 			<div className="p-0 h-52 relative ">
-				<Link href={`comics/${data.id}`}>
+				<Link
+					href={`comics/${data.id}`}
+					className="w-full h-full absolute top-0 left-0"
+				>
 					<Image
 						src={data.thumbnail}
 						fill

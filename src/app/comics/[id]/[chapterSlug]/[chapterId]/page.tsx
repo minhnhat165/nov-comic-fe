@@ -4,6 +4,7 @@ import { Chapter, Comic, PageChapter } from '@/types/comic';
 
 import { COMIC_API_URL } from '@/configs';
 import { ChapterNav } from '@/components/comic/chapter-nav';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
@@ -88,7 +89,7 @@ export default async function ComicChapter(props: ComicChapterProps) {
 			<div>
 				{pageChapters.map((page) => (
 					<div key={page.id} className="relative">
-						<img
+						<Image
 							src={page.src}
 							alt={page.id}
 							height={500}
