@@ -89,7 +89,7 @@ export default async function ComicChapter(props: ComicChapterProps) {
 			<div>
 				{pageChapters.map((page) => (
 					<div key={page.id} className="relative">
-						<img
+						<Image
 							src={page.src}
 							alt={page.id}
 							height={500}
