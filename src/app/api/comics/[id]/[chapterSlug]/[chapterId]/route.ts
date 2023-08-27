@@ -1,6 +1,7 @@
 import { Comic, PageChapter } from '@/types/comic';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { genScrapeImgUrl } from '@/utils/gen-scrape-img';
 import { getScrape } from '@/utils/get-scrape';
 
 export const dynamic = 'force-dynamic';
@@ -24,11 +25,7 @@ export async function GET(
 				const $this = $(this);
 				const id = $this.attr('data-index') as string;
 				const name = $this.attr('alt') as string;
-				let src = $this.attr('src') as string;
-				if (src.startsWith('//')) {
-					src = 'https:' + src;
-				}
-
+				let src = genScrapeImgUrl($this.attr('src') as string);
 				return { id, name, src };
 			})
 			.get();
