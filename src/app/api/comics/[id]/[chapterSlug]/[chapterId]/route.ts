@@ -26,7 +26,6 @@ export async function GET(
 				const id = $this.attr('data-index') as string;
 				const name = $this.attr('alt') as string;
 				let src = genScrapeImgUrl($this.attr('src') as string);
-				console.log(src);
 				return { id, name, src };
 			})
 			.get();

@@ -5,13 +5,11 @@ import { ClockIcon, FireIcon } from '@heroicons/react/24/solid';
 
 import { Comic } from '@/types/comic';
 import { ComicCard } from '@/components/comic/comic-card';
-import ImageComponent from '@/components/ui/ImgComponent';
 import { ListResponse } from '@/types/api';
 import { Pagination } from '@/components/ui/pagination';
 import { RecommendSlide } from '@/components/comic/recommend-slide';
 import { Typography } from '@/components/ui/typography';
 import { redirect } from 'next/navigation';
-import { scrapeImg } from '@/utils/scrape-img';
 
 const getRecommendComic = async (): Promise<ListResponse<Comic>> => {
 	const res = await fetch(`${COMIC_API_URL}/recommendations`, {
