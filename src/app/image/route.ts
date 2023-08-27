@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
 
 	try {
 		const providers = ['www.nettruyenio.com', 'www.nettruyenmax.com'];
-		const referer = `https://${providers[Math.floor(Math.random() * 2)]}`;
+		const referer = `https://${providers[1]}`;
 		const userAgent = userAgents[Math.floor(Math.random() * UALength)];
 		const res = await fetch(imageLink, {
 			headers: {
