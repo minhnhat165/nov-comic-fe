@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { UALength, userAgents } from '@/configs/user-agent';
 
+import { CRAWLER_API_URL } from '@/configs';
+
 export async function GET(req: NextRequest) {
 	const searchParams = req.nextUrl.searchParams;
 	let imageLink = searchParams.get('data') as string;
 
 	try {
-		const providers = ['www.nettruyenio.com', 'www.nettruyenmax.com'];
-		const referer = `https://${providers[1]}`;
+		const referer = `https://${CRAWLER_API_URL}`;
 		const userAgent = userAgents[Math.floor(Math.random() * UALength)];
 		const res = await fetch(imageLink, {
 			headers: {
